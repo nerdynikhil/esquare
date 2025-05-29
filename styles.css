@@ -421,14 +421,14 @@ footer {
 }
 
 .client-logos img {
-    max-height: 80px;
-    margin: 0 20px;
-    filter: grayscale(100%); /* Optional: grayscale effect */
+    height: 70px;
+    width: auto;
+    margin: 10px 20px;
+    filter: grayscale(100%);
     transition: filter 0.3s ease;
 }
 
 .client-logos img:hover {
-    opacity: 1;
     filter: grayscale(0%);
 }
 
