@@ -410,16 +410,22 @@ footer {
 }
 
 .client-logos img {
-    height: 60px;
-    width: auto;
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-    filter: grayscale(100%);
+    max-height: 80px;
+    margin: 0 20px;
+    filter: grayscale(100%); /* Optional: grayscale effect */
+    transition: filter 0.3s ease;
 }
 
 .client-logos img:hover {
     opacity: 1;
     filter: grayscale(0%);
+}
+
+video {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Helps with alignment */
+    margin: 0 auto; /* Centers the video if its smaller than container */
 }
 
 @media (max-width: 768px) {
