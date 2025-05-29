@@ -63,8 +63,8 @@ header {
 
 .nav-links a {
     text-decoration: none;
-    color: var(--text-color);
-    font-weight: 300;
+    color: white;
+    font-weight: 600;
     letter-spacing: -0.5px;
     opacity: 0.8;
     transition: all 0.3s ease;
