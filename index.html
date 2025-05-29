@@ -33,10 +33,13 @@
     </header>
 
     <section class="video-section">
-        <video autoplay loop playsinline>
-            <source src="videos/long.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+        <div class="video-container">
+            <video loop playsinline>
+                <source src="videos/long.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="play-button"></div>
+        </div>
     </section>
 
     <section class="hero" id="home">
@@ -122,11 +125,12 @@
     </section>
 
     <section class="section">
-        <div class="container">
-            <video autoplay loop muted playsinline>
+        <div class="video-container">
+            <video loop muted playsinline>
                 <source src="videos/social media .mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
+            <div class="play-button"></div>
         </div>
     </section>
 
@@ -162,6 +166,16 @@
                     <div class="stat-label">Malls</div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section class="video-section">
+        <div class="video-container">
+            <video loop playsinline class="scroll-autoplay-video">
+                <source src="videos/outdoor advertising.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="play-button"></div>
         </div>
     </section>
 

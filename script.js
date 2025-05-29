@@ -83,4 +83,65 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         );
     });
+
+    // Video play/pause functionality
+    const videoContainers = document.querySelectorAll('.video-container');
+
+    videoContainers.forEach(container => {
+        const video = container.querySelector('video');
+        const playButton = container.querySelector('.play-button');
+
+        // Add click listener to play button
+        playButton.addEventListener('click', () => {
+            if (video.paused) {
+                video.play();
+                container.classList.add('playing');
+            } else {
+                video.pause();
+                container.classList.remove('playing');
+            }
+        });
+
+        // Add event listeners to video for pause/end
+        video.addEventListener('pause', () => {
+            container.classList.remove('playing');
+        });
+
+        video.addEventListener('ended', () => {
+            container.classList.remove('playing');
+        });
+
+        // Set up ScrollTrigger for each video container
+        ScrollTrigger.create({
+            trigger: container,
+            start: 'top bottom',
+            end: 'bottom top',
+            onEnter: () => {
+                // Auto-play when scrolled into view
+                if (video.paused) {
+                    video.play();
+                    container.classList.add('playing');
+                }
+            },
+            onLeave: () => {
+                if (!video.paused) {
+                    video.pause();
+                    container.classList.remove('playing');
+                }
+            },
+            onEnterBack: () => {
+                // Auto-play when scrolling back into view
+                if (video.paused) {
+                    video.play();
+                    container.classList.add('playing');
+                }
+            },
+            onLeaveBack: () => {
+                if (!video.paused) {
+                    video.pause();
+                    container.classList.remove('playing');
+                }
+            }
+        });
+    });
 }); 
