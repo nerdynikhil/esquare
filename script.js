@@ -1,19 +1,58 @@
-// Scroll effect for header
+// Scroll effect for header and scroll-to-top button
 window.addEventListener('scroll', function() {
     const header = document.querySelector('header');
+    const scrollToTop = document.querySelector('.scroll-to-top');
+
+    // Header effects
     if (window.scrollY > 50) {
-        header.style.backdropFilter = 'blur(10px)';
-        header.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
-        header.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
     } else {
-        header.style.backdropFilter = 'none';
-        header.style.backgroundColor = 'transparent';
-        header.style.boxShadow = 'none';
+        header.classList.remove('scrolled');
+    }
+
+    // Update navbar background opacity based on scroll
+    const scrollProgress = Math.min(window.scrollY / 500, 1);
+    header.style.background = `rgba(15, 23, 42, ${0.85 + (scrollProgress * 0.15)})`;
+    header.style.backdropFilter = `blur(${10 + (scrollProgress * 10)}px)`;
+
+    // Scroll-to-top button visibility
+    if (window.scrollY > 500) {
+        scrollToTop.classList.add('visible');
+    } else {
+        scrollToTop.classList.remove('visible');
     }
 });
 
 // GSAP animations
 document.addEventListener('DOMContentLoaded', function() {
+    // Mobile menu toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
+        });
+    }
+
+    // Close mobile menu when clicking nav links
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenuBtn.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        });
+    });
+    // Scroll-to-top functionality
+    const scrollToTop = document.querySelector('.scroll-to-top');
+    scrollToTop.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
     // Hero section animation
     gsap.fromTo('.hero-content', 
         {opacity: 0, y: 50}, 
@@ -43,9 +82,10 @@ document.addEventListener('DOMContentLoaded', function() {
         );
     });
 
-    // Service card animations
+    // Service card animations with hover effect
     const serviceCards = document.querySelectorAll('.service-card');
     serviceCards.forEach((card, index) => {
+        // Initial animation
         gsap.fromTo(card, 
             {opacity: 0, y: 30, filter: 'blur(5px)'}, 
             {
@@ -62,6 +102,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 ease: "power2.out"
             }
         );
+
+        // Hover animation for icon
+        const icon = card.querySelector('.service-icon');
+        card.addEventListener('mouseenter', () => {
+            gsap.to(icon, {
+                scale: 1.2,
+                color: getComputedStyle(document.documentElement).getPropertyValue('--accent-color'),
+                duration: 0.3,
+                ease: "back.out(1.7)"
+            });
+        });
+
+        card.addEventListener('mouseleave', () => {
+            gsap.to(icon, {
+                scale: 1,
+                color: 'inherit',
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        });
     });
 
     // Glass card animations
